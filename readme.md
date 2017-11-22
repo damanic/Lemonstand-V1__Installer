@@ -5,15 +5,15 @@ This will install Lemonstand V1 along with an UpdateCenter configuration that ap
 
 ## Install
 
-- Pull the repo into your webserver directory
-- Run install.php
+- Pull the repo or download a release ZIP: https://github.com/damanic/Lemonstand-V1__Installer/releases
+- From your webserver directory run install.php
 - Follow the steps
 - After install be sure to run a system update to apply all the security patches, bug fixes and improvements.
 - It is also recommended you add a GITHUB API access token to the Update Center config, otherwise you may exceed API request limits. More info: https://github.com/damanic/ls1-module-updatecenter/blob/master/readme.md
 
-## Requirements
+## Licence Requirements
 
-- A Valid Lemonstand V1 Licence.
+- You will need a valid Lemonstand V1 Licence.
 - Get a trial licences from:  http://v1.lemonstand.com/freetrial/ (if security cert expired, ignore)
 - Trial licence can be upgraded to full once you have a login account
 
