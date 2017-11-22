@@ -1,0 +1,35 @@
+<div class="nine columns content">
+	<form action="<?php echo getRequestUri() ?>" method="post" class="custom">
+		<h3>Welcome to the LemonStand installation!</h3>
+
+		<?php if (!strlen($error)): ?>
+			<p>Please read the following license agreement.</p>
+			<div class="eula-scroller">
+				<p><?php echo nl2br(_h($eula_text)) ?></p>
+			</div>
+		<?php endif ?>
+
+		<?php if (strlen($error)): ?>
+			<div class="alert-box alert"><?php echo _h($error) ?></div>
+		<?php endif ?>
+		
+		<p>You can read about the LemonStand installation process in the LemonStand Documentation: <a href="http://lemonstand.com/docs/installing_lemonstand/" target="_blank">http://lemonstand.com/docs/installing_lemonstand/</a></p>
+
+		<?php if (!strlen($error)): ?>
+			<div class="row form-panel">
+				<div class="twelve columns">
+					<label for="agree">
+						<input type="checkbox" data-enables="eula-step-next" name="agree" value="1" id="agree" class="text"/>
+						I agree with all the terms of the License Agreement
+					</label>
+				</div>
+			</div>
+
+			<input type="submit" name="form_action" class="btn" disabled="disabled" value="Next" data-provides="eula-step-next"/>
+			<input type="hidden" name="step" value="welcome"/>
+			<input type="hidden" name="install_key" value="<?php echo md5(gen_install_key()) ?>"/>
+		<?php endif ?>
+	</form>
+</div>
+
+<?php render_partial('installation_progress', array('current_index'=>1)) ?>

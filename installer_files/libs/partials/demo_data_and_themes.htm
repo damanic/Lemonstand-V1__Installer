@@ -1,0 +1,59 @@
+<div class="nine columns content">
+	<?php 
+		$error_field = '';
+		if (isset($error)): 
+			if ($error instanceof ValidationException)
+				$error_field = $error->field;
+	?>
+		<div class="alert-box alert offset-top"><?php echo _h($error->getMessage()) ?> <a href="" class="close">&times;</a> </div>
+	<?php endif ?>
+
+	<h3>Themes</h3>
+
+	<form class="custom" action="<?php echo getRequestUri() ?>" method="post">
+		<p>Import <a href="http://v1.lemonstand.com/marketplace/theme/zest-phpengine/" target="_blank">Zest</a>, a clean, responsive LemonStand theme.</p>
+
+		<p>You can import two versions of the Zest theme - PHP-based and Twig based. Twig is the alternative LemonStand templating engine. It is simpler and less verbose than PHP and more suitable for designers. <span class="label success">Note</span> Some modules on the <a href="http://v1.lemonstand.com/marketplace/" target="_blank">Marketplace</a> do not support Twig.</p>
+
+		<div class="screenshot"><div class="container"><img src="installer_files/resources/images/zest_screenshot.png"/></div></div>
+
+		<div class="row form-panel">
+			<div class="tvelwe columns">
+				<label for="import_default_theme">
+					<input <?php if (_post('import_default_theme')): ?>checked="checked"<?php endif ?> type="checkbox" name="import_default_theme" value="1" id="import_default_theme" class="text"/>
+					Import PHP version the Zest theme.
+				</label>
+
+				<label for="import_default_theme">
+					<input <?php if (_post('import_default_theme_twig')): ?>checked="checked"<?php endif ?> type="checkbox" name="import_default_theme_twig" value="1" id="import_default_theme_twig" class="text"/>
+					Import Twig version the Zest theme.
+				</label>
+			</div>
+		</div>
+
+		<p><span class="label success">Note</span> More LemonStand themes are available on the <a href="http://v1.lemonstand.com/marketplace/" target="_blank">Marketplace</a>.</p>
+
+		<h3>Demo Data</h3>
+
+		<p>You can also import demo products, categories and blog posts to play with the system before you enter your own data. It is easy to delete demo products, categories and blog posts from the Administration Area.</p>
+
+		<div class="row form-panel">
+			<div class="tvelwe columns">
+				<label for="import_demo_data">
+					<input <?php if (_post('import_demo_data')): ?>checked="checked"<?php endif ?> type="checkbox" name="import_demo_data" value="1" id="import_demo_data" class="text"/>
+					Import demo data.
+				</label>
+			</div>
+		</div>
+
+		<input type="hidden" name="step" value="themes_and_demo_data"/>
+		<input type="hidden" name="install_key" value="<?php echo _post('install_key') ?>"/>
+		<input type="submit" name="form_action" value="Install LemonStand!" class="btn" data-provides="install-lemonstand"/>
+
+		<div class="progress-indicator hidden">
+			Installing LemonStand...
+		</div>
+	</form>
+
+</div>
+<?php render_partial('installation_progress', array('current_index'=>5)) ?>

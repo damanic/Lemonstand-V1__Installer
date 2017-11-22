@@ -1,0 +1,93 @@
+<div class="nine columns content">
+	<h3>System Administrator Account</h3>
+
+	<form  action="<?php echo getRequestUri() ?>" method="post" id="step_form" data-validate="true">
+		<p>Create your first administrator account in order to access the Administrator area of the website. Note these account details down in a secure place. They can be changed later in the Administration Area.</p>
+
+		<?php 
+			$error_field = '';
+			if (isset($error)): 
+				if ($error instanceof ValidationException)
+					$error_field = $error->field;
+		?>
+			<div class="alert-box alert"><?php echo _h($error->getMessage()) ?></div>
+		<?php endif ?>
+
+		<div class="row">
+			<div class="six columns <?php echo error_marker($error_field, 'admin_firstname') ?>">
+				<label for="admin_firstname" data-validation-text="Administration Account / First Name">First Name</label>
+				<input autocomplete="off" value="<?php echo _h(_post('firstname')) ?>" type="text" name="firstname" id="admin_firstname" class="text" data-enables="users-next-step"/>
+			</div>
+			
+			<div class="six columns <?php echo error_marker($error_field, 'admin_lastname') ?>">
+				<label for="admin_lastname" data-validation-text="Administration Account / Last Name">Last Name</label>
+				<input autocomplete="off" value="<?php echo _h(_post('lastname')) ?>" type="text" name="lastname" id="admin_lastname" class="text" data-enables="users-next-step"/>
+			</div>
+			<div class="six columns <?php echo error_marker($error_field, 'admin_email') ?>">
+				<label for="admin_email" data-validation-text="Administration Account / Email">Email</label>
+				<input autocomplete="off" value="<?php echo _h(_post('email')) ?>" type="text" name="email" id="admin_email" class="text" data-enables="users-next-step"/>
+			</div>
+			<div class="six columns <?php echo error_marker($error_field, 'admin_username') ?>">
+				<label for="admin_username" data-validation-text="Administration Account / User Name">User Name</label>
+				<input autocomplete="off" value="<?php echo _h(_post('username')) ?>" type="text" name="username" id="admin_username" class="text" data-enables="users-next-step"/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="six columns <?php echo error_marker($error_field, 'admin_password') ?>">
+				<label for="admin_password" data-validation-text="Administration Account / Password">Password</label>
+				<input autocomplete="off" value="" type="password" name="password" id="admin_password" class="text" data-enables="users-next-step"/>
+			</div>
+
+			<div class="six columns <?php echo error_marker($error_field, 'admin_password_confirm') ?>">
+				<label for="admin_password_confirm" data-validation-text="Administration Account / Password Confirmation">Password Confirmation</label>
+				<input autocomplete="off" value="" type="password" name="password_confirm" id="admin_password_confirm" class="text" data-enables="users-next-step"/>
+			</div>
+		</div>
+
+		<h3>Configuration Tool Account</h2>
+
+		<p>Set secure credentials for accessing the Configuration Tool, which is where you can change database connection parameters and the encryption key. Note these credentials down in a secure place.</p>
+		
+		<p><span class="alert label">Important</span> There is no password restore feature for the LemonStand Configuration Tool.</p>
+
+		<div class="row">
+			<div class="twelve columns <?php echo error_marker($error_field, 'config_username') ?>">
+				<label for="config_username" data-validation-text="Configuration Tool Account / User Name">User Name</label>
+				<input autocomplete="off" value="<?php echo _h(_post('config_username')) ?>" type="text" name="config_username" id="config_username" class="text" data-enables="users-next-step"/>
+			</div>
+			<div class="six columns <?php echo error_marker($error_field, 'config_password') ?>">
+				<label for="config_password" data-validation-text="Configuration Tool Account / Password">Password</label>
+				<input autocomplete="off" value="" type="password" name="config_password" id="config_password" class="text" data-enables="users-next-step"/>
+			</div>
+			<div class="six columns <?php echo error_marker($error_field, 'config_password_confirm') ?>">
+				<label for="config_password_confirm" data-validation-text="Configuration Tool Account / Password Confirmation">Password Confirmation</label>
+				<input autocomplete="off" value="" type="password" name="config_password_confirm" id="config_password_confirm" class="text" data-enables="users-next-step"/>
+			</div>
+		</div>
+
+		<input type="submit" name="form_action" value="Next" class="btn" id="next_btn" data-provides="users-next-step"/>
+
+		<span class="success label submit-hint" data-visual="submit-hint"></span>
+
+		<input type="hidden" name="step" value="user_accounts"/>
+		<input type="hidden" name="install_key" value="<?php echo _post('install_key') ?>"/>
+	</form>
+
+	<script type="text/javascript">
+		(function ($) {
+			$(document).ready(function() {
+				<?php if (!($error_field)): ?>
+					$('#admin_firstname').focus();
+				<?php else: ?>
+					$('#<?php echo $error_field ?>').focus();
+				<?php endif ?>
+				
+				$('#step_form').on('submit', function(){
+					$('#step_form').data('disabled', true);
+					$('#next_btn').disabled = true;
+				});
+			});
+		})(jQuery);
+	</script>
+</div>
+<?php render_partial('installation_progress', array('current_index'=>4)) ?>

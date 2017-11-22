@@ -1,0 +1,245 @@
+body {
+  font: 14px "Helvetica Neue", Arial, sans-serif; 
+  -webkit-text-size-adjust: 100%;
+  background: white;
+}
+
+a {
+  color: #2795b6;
+}
+
+h1 {
+  font-size: 30px;
+  margin-top: 17px;
+  padding-left: 70px;
+  padding-top: 11px;
+  height: 60px;
+  background: transparent url(../images/ls_logo.png) no-repeat left top;
+}
+
+h2 {
+  font-size: 25px;
+  font-weight: normal;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+h3.error, li.error {
+  color: #c60f13;
+}
+
+h4 {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+header .row {
+  border-bottom: 1px solid #eee;
+}
+
+footer .row {
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+footer p {
+  font-size: 12px;
+}
+
+.hidden {
+  display: none!important;
+}
+
+.content {
+  border-right: 1px solid #eee;
+  min-height: 350px;
+}
+
+.alert-box {
+  text-shadow: none!important;
+  padding: 10px 15px!important;
+}
+
+div.alert-box.alert a.close {
+  -moz-opacity: 0.6!important;
+  -khtml-opacity: 0.6!important;
+  -webkit-opacity: 0.6!important;
+  opacity: 0.6!important;
+  color: #fff;
+}
+
+.alert-box.floating {
+  position: fixed;
+  top: 20px;
+  z-index: 1000;
+  width: 699px;
+}
+
+.eula-scroller {
+  height: 400px;
+  overflow: auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.eula-scroller p {
+  margin-bottom: 0;
+}
+
+/* Progress */
+
+ul.progress {
+  margin-top: 20px;
+  margin-left: 15px;
+  border-left: 1px solid #ccc;
+}
+
+ul.progress li {
+  position: relative;
+  left: -14px;
+  list-style-type: none;
+  color: #999;
+  margin-bottom: 10px;
+  line-height: 140%;
+  font-size: 12px;
+  background: white;
+}
+
+ul.progress li span {
+  display: inline-block;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  border: 2px solid #ccc;
+  width: 25px;
+  height: 25px;
+  padding: 3px 0 0 7px;
+  margin-right: 5px;
+}
+
+body.gecko ul.progress li span {
+  padding-left: 8px;
+  padding-top: 2px;
+}
+
+ul.progress li.complete {
+  color: #333;
+}
+
+ul.progress li.complete span {
+  border-color: #666666;
+}
+
+.screenshot {
+  border: 2px solid #eee;
+  width: 100%;
+  height: 280px;
+  margin-bottom: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.screenshot img {
+  display: block;
+  position: absolute;
+  width: auto!important;
+  height: auto!important;
+  max-width: none!important;
+  cursor: move;
+  left: 160px;
+  top: 202px;
+}
+
+.screenshot .container {
+  width: 1265px;
+  height: 1080px;
+  left: -265px;
+  top: -409px;
+
+  position: absolute;
+}
+
+/* Forms */
+
+.form-panel .columns {
+  margin-bottom: 20px;
+}
+
+.form-panel .columns, .offset-bottom {
+  margin-bottom: 20px;
+}
+
+.offset-top {
+  margin-top: 20px;
+}
+
+label {
+  font-weight: normal;
+  color: #333;
+  line-height: 150%;
+}
+
+.submit-hint {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+form.custom span.custom {
+  top: 3px;
+  margin-right: 4px;
+}
+
+.btn, .progress-indicator {
+  padding: 10px 15px;
+  margin: 0;
+  background-color: #e99f00;
+  border: none;
+  font: bold 14px Arial, "Helvetica Neue", sans-serif; 
+  text-transform: uppercase;
+  color: white;
+  cursor: pointer;
+}
+
+a.btn {
+  display: inline-block;
+}
+
+a.btn:hover, a.btn:active, a.btn:focus {
+  color: white;
+}
+
+.progress-indicator {
+  display: inline-block;
+  padding-left: 36px;
+  background: #e99f00 url(../images/indicator.gif) no-repeat 7px center;
+  cursor: default;
+}
+
+.btn[disabled] {
+  background: #fbdb98;
+  cursor: default;
+}
+
+form.custom div.custom.dropdown a.current {line-height: 30px!important; text-overflow: ellipsis; overflow: hidden;}
+form.custom div.custom.dropdown a.selector {height: 32px!important;}
+form.custom div.custom.dropdown ul {top: 31px;}
+  form.custom div.custom.dropdown ul li {white-space: normal;}
+  form.custom div.custom.dropdown {width: 100%!important;}
+  form.custom div.custom.dropdown ul {width: 100%!important;}
+
+div.checkbox-align {
+  margin-left: 18px!important;
+}
+
+/*
+h2 {font-size: 20px;}
+h3 {font-size: 16px;}
+h4 {font-size: 14px;}
+h1, h2, h3 {color: #2a2a2a;}
+ul li {list-style-type: none; color: #656565;}
+p {color: #656565; margin-bottom: 5px;}
+*/

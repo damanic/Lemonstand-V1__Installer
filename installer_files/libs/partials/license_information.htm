@@ -1,0 +1,52 @@
+<div class="nine columns content">
+	<h3>License Information</h3>
+	<form action="<?php echo getRequestUri() ?>" method="post" id="step_form">
+		<p>Please enter the license holder name and serial number in the form below. This information was sent to you in the payment confirmation notification.</p>
+		<p><span class="alert label">Important</span> The license information you provide will be sent to the <a href="http://lemonstand.com" target="_blank">LemonStand eCommerce Inc.</a> server and validated. The operation could take several minutes, depending on your Internet connection speed.</p>
+
+		<?php 
+			$error_field = '';
+
+			if (isset($error)): 
+				if ($error instanceof ValidationException)
+					$error_field = $error->field;
+		?>
+			<div class="alert-box alert"><?php echo $error->getMessage() ?></div>
+		<?php endif ?>
+
+		<div class="row">
+			<div class="six columns <?php echo error_marker($error_field, 'holder_name') ?>">
+				<label for="holder_name">License Holder Name</label>
+				<input autocomplete="off" value="<?php echo _h(_post('holder_name')) ?>" type="text" name="holder_name" id="holder_name" data-enables="license-next-step"/>
+			</div>
+			<div class="six columns <?php echo error_marker($error_field, 'serial_number') ?>">
+				<label for="serial_number">Serial Number</label>
+				<input autocomplete="off" value="<?php echo _h(_post('serial_number')) ?>" type="text" name="serial_number" id="serial_number" data-enables="license-next-step"/>
+			</div>
+		</div>
+		
+		<input type="submit" name="form_action" value="Next" class="btn" id="next_btn" data-provides="license-next-step"/>
+		<span class="success label submit-hint" data-visual="submit-hint"></span>
+		<input type="hidden" name="step" value="license_information"/>
+		<input type="hidden" name="install_key" value="<?php echo _post('install_key') ?>"/>
+	</form>
+
+	<script type="text/javascript">
+		(function ($) {
+			$(document).ready(function() {
+				<?php if (!($error_field)): ?>
+					$('#holder_name').focus();
+				<?php else: ?>
+					$('#<?php echo $error_field ?>').focus();
+				<?php endif ?>
+				
+				$('#step_form').on('submit', function(){
+					$('#step_form').data('disabled', true);
+					$('#next_btn').attr('disabled', true);
+				});
+			});
+		})(jQuery);
+	</script>
+</div>
+
+<?php render_partial('installation_progress', array('current_index'=>2)) ?>

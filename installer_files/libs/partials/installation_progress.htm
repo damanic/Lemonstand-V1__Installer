@@ -1,0 +1,21 @@
+<div class="three columns">
+    <h3>Installation Progress</h3>
+
+    <p>Install LemonStand in just 5 simple steps.</p>
+
+    <?php
+        $steps = array(
+            'Start',
+            'License Information',
+            'System configuration',
+            'User accounts',
+            'Themes and demo data'
+        );
+    ?>
+
+    <ul class="progress">
+        <?php foreach ($steps as $index=>$name): ?>
+            <li class="<?php echo ($current_index >= ($index+1) ? 'complete' : null) ?>"><span><?php echo $index+1 ?></span> <?php echo $name ?></li>
+        <?php endforeach ?>
+    </ul>
+</div>

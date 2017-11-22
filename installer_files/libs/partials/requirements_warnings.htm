@@ -1,0 +1,17 @@
+<div class="nine columns content">
+    <h4>Requirements not met</h4>
+    <p>We are sorry. Your system does not meet the minimum requirements for the installation. The following requirements did not pass the test:</p>
+
+    <ul>
+        <?php foreach ($requirements as $requirement=>$status): 
+            if ($status)
+                continue;
+        ?>
+            <li class="error"><?php echo $requirement ?></li>
+        <?php endforeach ?>
+    </ul>
+
+    <p>You can read about the system requirements in the <a href="http://v1.lemonstand.com/docs/system_requirements/">LemonStand documentation</a>.</p>
+</div>
+
+<?php render_partial('installation_progress', array('current_index'=>1)) ?>

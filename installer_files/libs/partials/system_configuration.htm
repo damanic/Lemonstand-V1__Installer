@@ -1,0 +1,144 @@
+<div class="nine columns content">
+	<h3>Database Configuration</h3>
+
+	<form action="<?php echo getRequestUri() ?>" method="post" id="step_form" class="custom" data-validate="true">
+		<p>Please prepare an empty MySQL database for LemonStand.</p>
+
+		<?php 
+			$error_field = '';
+			if (isset($error)): 
+				if ($error instanceof ValidationException)
+					$error_field = $error->field;
+		?>
+			<div class="alert-box alert floating"><?php echo _h($error->getMessage()) ?> <a href="" class="close">&times;</a> </div>
+		<?php endif ?>
+
+		<div class="row">
+			<div class="six columns <?php echo error_marker($error_field, 'mysql_host') ?>">
+				<label for="mysql_host">MySQL Host</label>
+				<input value="<?php echo _h(_post('mysql_host', 'localhost')) ?>" type="text" name="mysql_host" id="mysql_host" class="text" data-enables="system-next-step"/>
+			</div>
+			<div class="six columns <?php echo error_marker($error_field, 'db_name') ?>">
+				<label for="db_name">Database Name</label>
+				<input autocomplete="off" value="<?php echo _h(_post('db_name')) ?>" type="text" name="db_name" id="db_name" class="text" data-enables="system-next-step"/>
+			</div>
+			<div class="six columns <?php echo error_marker($error_field, 'mysql_user') ?>">
+				<label for="mysql_user">MySQL User</label>
+				<input autocomplete="off" value="<?php echo _h(_post('mysql_user')) ?>" type="text" name="mysql_user" id="mysql_user" class="text"/>
+			</div>
+			<div class="six columns">
+				<label for="mysql_password">MySQL Password</label>
+				<input autocomplete="off" type="password" name="mysql_password" value="" id="mysql_password" class="text"/>
+			</div>
+		</div>
+
+		<h3>Time Zone</h3>
+		<label for="time_zone">Please specify a time zone. The time zone will be used for displaying dates in the administration area and on the website.</label>
+		<?php $time_zones = timezone_identifiers_list(); ?>
+		<div class="offset-bottom">
+			<select name="time_zone" id="time_zone">
+				<?php foreach ($time_zones as $time_zone): 
+					$posted_zone = _post('time_zone');
+					if (!$posted_zone)
+						$checked = $time_zone == 'US/Central' || $time_zone == 'America/New_York';
+					else
+						$checked = $time_zone == $posted_zone;
+				?>
+					<option <?php echo $checked ? 'selected="selected"' : null  ?> value="<?php echo _h($time_zone) ?>"><?php echo _h($time_zone) ?></option>
+				<?php endforeach ?>
+			</select>
+		</div>
+
+		<h3>Administration URLs</h3>
+
+		<p>There are two special URLs in LemonStand: the Administration Area URL and the Configuration Tool URL. The Administration Area is where you will manage your store. The Configuration Tool is a web interface for managing the system configuration.</p>
+
+		<p>By default the URLs of the Administration Area and the Configuration Tool are <?php echo get_root_url().installer_root_url('<strong>backdoor</strong>') ?> and <?php echo get_root_url().installer_root_url('<strong>config_tool</strong>') ?>. It is recommended to change the default value to make the system more secure.</p>
+
+		<p>The  URL keys can contain only Latin characters, digits and underscore characters. Should you change the URL keys after the installation, you can do it by correcting the config/config.php file.</p>
+
+		<div class="row">
+			<div class="six columns <?php echo error_marker($error_field, 'backend_url') ?>">
+				<label for="backend_url">Administration Area URL key</label>
+				<input autocomplete="off" value="<?php echo _h(_post('backend_url', 'backdoor')) ?>" type="text" name="backend_url" id="backend_url" class="text" data-enables="system-next-step"/>
+			</div>
+			<div class="six columns <?php echo error_marker($error_field, 'config_url') ?>">
+				<label for="config_url">Configuration Tool URL key</label>
+				<input autocomplete="off" value="<?php echo _h(_post('config_url', 'config_tool')) ?>" type="text" name="config_url" id="config_url" class="text" data-enables="system-next-step"/>
+			</div>
+		</div>
+
+		<h3>ImageMagick Configuration</h3>
+
+		<p>ImageMagick is an image processing library which dramatically increases quality of thumbnails and product images in LemonStand. If ImageMagick is available on this server, please configure it using the following form. If ImageMagick is not available, the default PHP image processing functions will be used.</p>
+
+		<div class="row">
+			<div class="tvelwe columns">
+				<label for="enable_im">
+					<input <?php if (_post('enable_im')): ?>checked="checked"<?php endif ?> type="checkbox" name="enable_im" value="1" id="enable_im" class="text" onclick="$('convert_path').disabled = !this.checked"/>
+					ImageMagick is available and I would like LemonStand to use it</label>
+			</div>
+		</div>
+
+		<div id="im_config" class="row checkbox-align <?php if (!_post('enable_im')): ?>hide<?php endif ?>">
+			<div class="tvelwe columns <?php echo error_marker($error_field, 'convert_path') ?>">
+				<label for="convert_path">Please specify a path to the <strong>convert</strong> script which is a part of the ImageMagick library. If the <strong>convert</strong> script is accessible from anywhere, leave this field empty. Example: <strong>/usr/bin/</strong></label>
+				<input value="<?php echo _h(_post('convert_path')) ?>" type="text" name="convert_path" id="convert_path" class="text"/>
+			</div>
+		</div>
+
+		<h3>File Permissions</h3>
+
+		<p>Please specify permission masks for folders and files which LemonStand will create during the installation and software update sessions. The default permission value (<strong>777</strong>) is the most universal, but at the same time it provides less protection for your files. You may need to consult with your system administrator or hosting support team in order to find suitable permission masks for a web application. You can change the permission masks after the installation in the config/config.php file.</p>
+
+		<div class="row">
+			<div class="six columns <?php echo error_marker($error_field, 'folder_mask') ?>">
+				<label for="folder_mask">Folder Permission Mask</label>
+				<input autocomplete="off" value="<?php echo _h(_post('folder_mask', '777')) ?>" type="text" name="folder_mask" id="folder_mask" class="text" data-enables="system-next-step"/>
+			</div>
+			<div class="six columns <?php echo error_marker($error_field, 'file_mask') ?>">
+				<label for="file_mask">File Permission Mask</label>
+				<input autocomplete="off" value="<?php echo _h(_post('file_mask', '777')) ?>" type="text" name="file_mask" id="file_mask" class="text" data-enables="system-next-step"/>
+			</div>
+		</div>
+
+		<h3>Encryption Key</h3>
+
+		<p>The encryption key is a keyword which will be used to encrypt sensitive data in the database. The encryption key should be at least 6 characters in length.</p>
+		<p><span class="label alert">Important</span> Remember the encryption key, because it may be needed if you want to reinstall the application or move the database to another server. Without the encryption key it will not be possible to decrypt data and sensitive information could be lost.</p>
+
+		<div class="row">
+			<div class="six columns <?php echo error_marker($error_field, 'encryption_key') ?>">
+				<label for="encryption_key">Encryption Key</label>
+				<input autocomplete="off" type="password" name="encryption_key" id="encryption_key" class="text" data-enables="system-next-step"/>
+			</div>
+			<div class="six columns <?php echo error_marker($error_field, 'confirmation') ?>">
+				<label for="encryption_key">Encryption Key Confirmation</label>
+				<input autocomplete="off" type="password" name="confirmation" id="confirmation" class="text" data-enables="system-next-step"/>
+			</div>
+		</div>
+
+		<input type="submit" name="form_action" value="Next" id="next_btn" class="btn" data-provides="system-next-step"/>
+		<span class="success label submit-hint" data-visual="submit-hint"></span>
+		<input type="hidden" name="step" value="system_configuration"/>
+		<input type="hidden" name="install_key" value="<?php echo _post('install_key') ?>"/>
+	</form>
+
+	<script type="text/javascript">
+		(function ($) {
+			$(document).ready(function() {
+				<?php if (!($error_field)): ?>
+					$('#mysql_host').focus();
+				<?php else: ?>
+					$('#<?php echo $error_field ?>').focus();
+				<?php endif ?>
+				
+				$('#step_form').on('submit', function(){
+					$('#step_form').data('disabled', true);
+					$('#next_btn').attr('disabled', true);
+				});
+			});
+		})(jQuery);
+	</script>
+</div>
+<?php render_partial('installation_progress', array('current_index'=>3)) ?>

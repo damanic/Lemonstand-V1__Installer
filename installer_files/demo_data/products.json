@@ -1,0 +1,34 @@
+[
+    {
+        "price": 39.99,
+        "sku": "cap",
+        "name": "Baseball cap",
+        "description": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<p>",
+        "url_name": "cap",
+        "images": ["cap.jpg"]
+    },
+    {
+        "price": 99.99,
+        "sku": "glove",
+        "name": "Baseball glove",
+        "description": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<p>",
+        "url_name": "baseball-glove",
+        "images": ["glove.jpg"]
+    },
+    {
+        "price": 139.99,
+        "sku": "helmet",
+        "name": "Football helmet",
+        "description": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<p>",
+        "url_name": "helmet",
+        "images": ["helmet.jpg"]
+    },
+    {
+        "price": 26.99,
+        "sku": "sneakers",
+        "name": "Sneakers",
+        "description": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<p>",
+        "url_name": "sneakers",
+        "images": ["sneakers.jpg"]
+    }
+]
