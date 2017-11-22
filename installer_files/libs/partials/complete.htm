@@ -1,31 +1,61 @@
 <div class="nine columns content">
-		<h3>Congratulations!</h3>
-		<p>LemonStand installation has been successfully completed.</p>
+	<h3>Congratulations!</h3>
+	<p>LemonStand installation has been successfully completed.</p>
 
-		<h4>Website address</h4>
+	<h4>Security Considerations</h4>
 
-		<p>Your website is located here: <a target="_blank" href="<?php echo Phpr::$request->getRootUrl().installer_root_url('/') ?>"><?php echo Phpr::$request->getRootUrl().installer_root_url('/') ?></a></p>
 
-		<p><a class="btn" href="<?php echo Phpr::$request->getRootUrl().installer_root_url('/') ?>" target="_blank">Preview the Website</a></p>
+	<p>
+		<span class="alert label">Important</span>
+		It is highly recommended that you run a system update to get the latest security fixes and improvements from community updates.
+	</p>
 
-		<h4>Administration Area</h4>
+	<p>
+		<a class="btn" href="<?php echo Phpr::$request->getRootUrl().installer_root_url(Phpr::$config->get('BACKEND_URL')).'/system/modules' ?>" target="_blank">Login and Check for Updates</a>
+	</p>
 
-		<p>Use the following link to log into the LemonStand administration area: <a target="_blank" href="<?php echo Phpr::$request->getRootUrl().installer_root_url(Phpr::$config->get('BACKEND_URL')) ?>"><?php echo Phpr::$request->getRootUrl().installer_root_url(Phpr::$config->get('BACKEND_URL')) ?></a></p>
+	<p>
+		<span class="alert label">Important</span> It is highly recommended to remove the installer files form the server. Please delete the
+		<strong>install.php</strong> script and the <strong>installer_files</strong> directory.</p>
 
-		<p><a class="btn" href="<?php echo Phpr::$request->getRootUrl().installer_root_url(Phpr::$config->get('BACKEND_URL')) ?>" target="_blank">Log into the Administration Area</a></p>
+	<p>We recommend that you move the
+		<strong>config.dat</strong> file, located in the /config directory, to another directory that is unreachable from the Internet. After moving the file, please specify its absolute path in the
+		<strong>SECURE_CONFIG_PATH</strong> parameter in the /config/config.php file.</p>
 
-		<h4>Configuration Tool</h4>
+	<p>We recommend you add a GITHUB access token to the `UpdateCenter` to avoid hitting API access limits.
+		<a href="<?php echo Phpr::$request->getRootUrl().installer_root_url(Phpr::$config->get('BACKEND_URL')).'/updatecenter/setup/#tab_4' ?>">Click here to add your Access Token</a></p>
 
-		<p>Use Configuration Tool if you need to change the database connection parameters. Configuration Tool address: <a target="_blank" href="<?php echo Phpr::$request->getRootUrl().installer_root_url(Phpr::$config->get('CONFIG_URL')) ?>"><?php echo Phpr::$request->getRootUrl().installer_root_url(Phpr::$config->get('CONFIG_URL')); ?></a></p>
 
-		<p><a class="btn" href="<?php echo Phpr::$request->getRootUrl().installer_root_url(Phpr::$config->get('CONFIG_URL')) ?>" target="_blank">Log into the Configuration Tool</a></p>
-		
-		<h4>Security Considerations</h4>
-		
-		<p>We recommend that you move the <strong>config.dat</strong> file, located in the /config directory, to another directory that is unreachable from the Internet. After moving the file, please specify its absolute path in the <strong>SECURE_CONFIG_PATH</strong> parameter in the /config/config.php file.</p>
+	<h4>Website Info</h4>
 
-		<p><span class="alert label">Important</span> It is highly recommended to remove the installer files form the server. Please delete the <strong>install.php</strong> script and the <strong>installer_files</strong> directory.</p>
+	<p>Your website is located here:
+		<a target="_blank" href="<?php echo Phpr::$request->getRootUrl().installer_root_url('/') ?>"><?php echo Phpr::$request->getRootUrl().installer_root_url('/') ?></a>
+	</p>
 
-		<p>Thank you for choosing LemonStand eCommerce software!</p>
+	<p>
+		<a class="btn" href="<?php echo Phpr::$request->getRootUrl().installer_root_url('/') ?>" target="_blank">Preview the Website</a>
+	</p>
+
+	<h4>Administration Area</h4>
+
+	<p>Use the following link to log into the LemonStand administration area:
+		<a target="_blank" href="<?php echo Phpr::$request->getRootUrl().installer_root_url(Phpr::$config->get('BACKEND_URL')) ?>"><?php echo Phpr::$request->getRootUrl().installer_root_url(Phpr::$config->get('BACKEND_URL')) ?></a>
+	</p>
+
+	<p>
+		<a class="btn" href="<?php echo Phpr::$request->getRootUrl().installer_root_url(Phpr::$config->get('BACKEND_URL')) ?>" target="_blank">Log into the Administration Area</a>
+	</p>
+
+	<h4>Configuration Tool</h4>
+
+	<p>Use Configuration Tool if you need to change the database connection parameters. Configuration Tool address:
+		<a target="_blank" href="<?php echo Phpr::$request->getRootUrl().installer_root_url(Phpr::$config->get('CONFIG_URL')) ?>"><?php echo Phpr::$request->getRootUrl().installer_root_url(Phpr::$config->get('CONFIG_URL')); ?></a>
+	</p>
+
+	<p>
+		<a class="btn" href="<?php echo Phpr::$request->getRootUrl().installer_root_url(Phpr::$config->get('CONFIG_URL')) ?>" target="_blank">Log into the Configuration Tool</a>
+	</p>
+
+	<p>Thank you for choosing LemonStand eCommerce software!</p>
 </div>
 <?php render_partial('installation_progress', array('current_index'=>5)) ?>

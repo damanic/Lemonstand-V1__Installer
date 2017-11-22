@@ -966,7 +966,12 @@
 			set_dir_access(PATH_INSTALL.'/temp', $dir_permissions);
 			if ($cli_mode)
 				@chmod(PATH_INSTALL.'/temp', $cli_mode_permissions);
-			
+
+			/*
+			 * Install GIT UpdateCenter
+			 */
+			install_updatecenter($dir_permissions);
+
 			/*
 			 * Generate the config file
 			 */
@@ -1117,6 +1122,11 @@
 			Db_ModuleParameters::set('core', 'enc_test', Phpr_SecurityFramework::create()->salted_hash('lemonstand', $enc_key));
 			Db_ModuleParameters::set('core', 'hash', base64_encode($framework->encrypt($license_hash)));
 			Db_ModuleParameters::set('core', 'license_key', $license_key);
+
+			/*
+			 * Configure for GITHUB updates
+			 */
+			configure_update_center();
 
 			/*
 			 * Create administrator account
@@ -2036,6 +2046,45 @@
 				cli_print_line("Please enter Y or N and press the Return key");
 			}
 		}
+	}
+
+	function install_updatecenter($dir_permissions){
+		$updates_dir = PATH_INSTALL.'/installer_files/updates';
+		$from_dir = $updates_dir.'/damanic-updatecenter/updatecenter';
+		$to_dir = PATH_INSTALL.'/modules/updatecenter';
+		recurse_copy($from_dir,$to_dir,$dir_permissions);
+		recurse_copy($updates_dir.'/repositories',$to_dir.'/repositories', $dir_permissions);
+	}
+
+	function configure_update_center(){
+		if(!UpdateCenter_Helper::check_core_compatible()){
+			$updater = new UpdateCenter_CoreUpdate();
+			$updater->make_compatible();
+		}
+		$config  = UpdateCenter_Config::get();
+		if(!$config->has_active_repository()){
+			$config->repository_config = 'damanic';
+			$config->save();
+		}
+
+	}
+
+	function recurse_copy($src,$dst,$dir_permissions) {
+		$dir = opendir($src);
+		if (!file_exists($dst)) installer_make_dir($dst,$dir_permissions);
+		while(false !== ( $file = readdir($dir)) ) {
+			if (( $file != '.' ) && ( $file != '..' )) {
+				if ( is_dir($src . '/' . $file) ) {
+					recurse_copy($src . '/' . $file,$dst . '/' . $file, $dir_permissions);
+				}
+				else {
+					@copy($src . '/' . $file,$dst . '/' . $file);
+					@chmod($dst . '/' . $file, $dir_permissions);
+
+				}
+			}
+		}
+		closedir($dir);
 	}
 	
 ?>

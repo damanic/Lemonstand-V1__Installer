@@ -1,0 +1,3 @@
+[submodule "installer_files/updates/damanic-updatecenter"]
+	path = installer_files/updates/damanic-updatecenter
+	url = https://github.com/damanic/ls1-module-updatecenter
