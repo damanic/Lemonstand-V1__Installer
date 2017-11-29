@@ -1324,7 +1324,7 @@
 	{
 		$result = array();
 		
-		$result['PHP 5.2.5 or higher'] = version_compare(PHP_VERSION , "5.2.5", ">=");
+		$result['PHP 5.3 or higher'] = version_compare(PHP_VERSION , "5.3.0", ">=");
 		$result['PHP CURL library'] = function_exists('curl_init');
 		$result['PHP OpenSSL library'] = function_exists('openssl_open');
 		$result['PHP Mcrypt library'] = function_exists('mcrypt_encrypt');
