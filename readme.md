@@ -3,6 +3,9 @@
 ##### Includes Update Center for Community Updates
 This will install Lemonstand V1 along with an UpdateCenter configuration that applies important security fixes from GITHUB.
 
+## PHP 
+PHP Version 5, 5.3 or higher. 
+
 ## Install
 
 - Pull the repo or download a release ZIP: https://github.com/damanic/Lemonstand-V1__Installer/releases
